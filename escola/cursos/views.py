@@ -1,56 +1,20 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import generics
 
+from .models import Curso, Avaliacao
+from .serializers import CursoSerializer, AvaliacaoSerializer
 
-from .models import Curso,Avaliacao
-from .serializers import CursoSerializer,AvaliacaoSerializer
+class CursosAPIView(generics.ListCreateAPIView):
+    queryset=Curso.objects.all()
+    serializer_class=CursoSerializer
 
-from reportlab.pdfgen import canvas
-from django.http import HttpResponse
+class AvaliacoesAPIView(generics.ListCreateAPIView):
+    queryset=Avaliacao.objects.all()
+    serializer_class=AvaliacaoSerializer
 
-def cadastro(request):
-    # Crie o objeto HttpResponse com o cabeçalho de PDF apropriado.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=certidao_cadastro.pdf'
+class CursoAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Curso.objects.all()
+    serializer_class=CursoSerializer
 
-    # Crie o objeto PDF, usando o objeto response como seu "arquivo".
-    p = canvas.Canvas(response)
-
-    # Desenhe coisas no PDF. Aqui é onde a geração do PDF acontece.
-    doc="Digite aqui o texto que irá aparecer no pdf"
-    #coordenadas de onde será digitado 
-    x,y=[3,3]
-    p.drawString(x,y,doc)
-    # Feche o objeto PDF, e está feito.
-    p.showPage()
-    p.save()
-    return response
-
-class CursoAPIView(APIView):
-    """
-    API de Cursos do django
-    """
-    def get(self,request):
-        cursos=Curso.objects.all()
-        serializer=CursoSerializer(cursos,many=True)
-        return Response(serializer.data)
-    def post(self,request):
-        serializer=CursoSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data,status=status.HTTP_201_CREATED)
-class AvaliacaoAPIView(APIView):
-    """
-    API de Avaliacao do django
-    """
-    def get(self,request):
-        avaliacoes=Avaliacao.objects.all()
-        serializer=AvaliacaoSerializer(avaliacoes,many=True)
-        return Response(serializer.data)
-    def post(self,request):
-        serializer=AvaliacaoSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data,status=status.HTTP_201_CREATED)
+class AvaliacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Avaliacao.objects.all()
+    serializer_class=AvaliacaoSerializer

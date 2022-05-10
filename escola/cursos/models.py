@@ -22,7 +22,7 @@ class Avaliacao(Base):
     curso=models.ForeignKey(Curso,related_name='avaliacoes',on_delete=models.CASCADE)
     nome=models.CharField(max_length=255)
     email=models.EmailField()
-    comentarios=models.TextField(blank=True,default='')
+    comentario=models.TextField(blank=True,default='')
 
     avaliacao=models.DecimalField(max_digits=2,decimal_places=1)
     class Meta:
