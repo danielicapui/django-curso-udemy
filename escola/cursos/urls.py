@@ -1,5 +1,19 @@
 from django.urls import path
-from .views import CursoAPIView,AvaliacaoAPIView,CursosAPIView,AvaliacoesAPIView
+
+from rest_framework.routers import SimpleRouter
+from .views import (
+    CursoAPIView,
+    AvaliacaoAPIView,
+    CursosAPIView,
+    AvaliacoesAPIView,
+    AvaliacaoViewSet,
+    CursoViewSet,
+    )
+
+router=SimpleRouter()
+router.register('cursos',CursoViewSet)
+router.register('avaliacoes',AvaliacaoViewSet)
+
 #app_name ='cursos'
 urlpatterns = [
     #path('<int:question_id>/vote/',views.cadastro,name='cadastro'),
