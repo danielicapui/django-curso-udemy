@@ -20,7 +20,14 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
             'ativo'
         )
 class CursoSerializer(serializers.ModelSerializer):
-
+    #Nested Relationship abordagem que mostra os dados e relações
+    #avaliacoes=AvaliacaoSerializer(many=True,read_only=True)
+    
+    #HyperLinked Related Field abordagem que mostra os links
+    #avaliacoes=serializers.HyperlinkedRelatedField(many=True,read_only=True,view_name='avaliacao-detail')
+    
+    #Primary Key related Field abordagem 
+    avaliacoes=serializers.PrimaryKeyRelatedField(many=True,read_only=True)
     class Meta:
         model=Curso
         fields=(
@@ -28,5 +35,6 @@ class CursoSerializer(serializers.ModelSerializer):
             'titulo',
             'url',
             'criacao',
-            'ativo'
+            'ativo',
+            'avaliacoes'
         )
