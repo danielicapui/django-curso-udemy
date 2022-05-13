@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+Token: 0d89b122b7981575f6c9179aded018d27b1f7985
+
 """
 
 from pathlib import Path
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'reportlab',
+    'rest_framework.authtoken',
 
     'cursos',
 ]
@@ -131,7 +135,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 #DRF
 REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
