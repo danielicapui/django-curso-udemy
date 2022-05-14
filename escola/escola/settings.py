@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 
-Token: 0d89b122b7981575f6c9179aded018d27b1f7985
-
+Token danie: 0d89b122b7981575f6c9179aded018d27b1f7985
+Token misaki: f5aec91588315d1fe902f726b77d0bc5ef9ea3eb
 """
 
 from pathlib import Path
