@@ -142,7 +142,15 @@ REST_FRAMEWORK={
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 2,
+    'DEFAULT_THROTTLE_CLASSES':(
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES':{
+        'anon':'4/minute', #second,day,mouth,year
+        'user':'8/minute'
+    }
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
